@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import functools
 from .utils import concat, chop, drop_at
 from .draw import show_board, cls, goto
 
@@ -18,17 +17,18 @@ def get_input():
 
 def play():
     game = new_game()
-    while True:
+    running = True
+    while running:
         cls()
         goto(1,1)
         game.draw_board()
 
         if game.wins():
             print("Player {} wins!".format(game.get_player()))
+            running = False
         elif game.full():
             print("It is a draw!")
-            input("Press enter to start a new game.")
-            game = new_game()
+            running = False
         else:
             command = get_input()
             if command is None:
@@ -36,7 +36,6 @@ def play():
                 continue
             else:
                 game = game.move(command)
-
 
 
 class Game():
