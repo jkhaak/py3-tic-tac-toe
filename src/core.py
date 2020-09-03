@@ -9,12 +9,34 @@ def new_game():
     return Game.empty()
 
 
-def play(game):
+def get_input():
+    try:
+        return int(input())
+    except ValueError:
+        return None
+
+
+def play():
+    game = new_game()
     while True:
         cls()
         goto(1,1)
-        show_board(game.grid)
-        command = input()
+        game.draw_board()
+
+        if game.wins():
+            print("Player {} wins!".format(game.get_player()))
+        elif game.full():
+            print("It is a draw!")
+            input("Press enter to start a new game.")
+            game = new_game()
+        else:
+            command = get_input()
+            if command is None:
+                print("Error: invalid input")
+                continue
+            else:
+                game = game.move(command)
+
 
 
 class Game():
@@ -26,6 +48,9 @@ class Game():
     def empty(cls):
         grid = chop(3, [0 for _ in range(9)])
         return Game(1, grid)
+
+    def get_player(self):
+        return 'O' if self.player == 1 else 'X'
 
     def valid_move(self, i):
         return 1 <= i and i <= 9 and concat(self.grid)[i-1] == 0
@@ -46,8 +71,8 @@ class Game():
         show_board(self.grid)
 
     def wins(self):
-        pass
+        return False
 
     def full(self):
-        pass
+        return all([i != 0 for i in concat(self.grid)])
 
