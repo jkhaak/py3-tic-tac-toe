@@ -45,14 +45,20 @@ class Game():
 
     @classmethod
     def empty(cls):
-        grid = chop(3, [0 for _ in range(9)])
-        return Game(1, grid)
+        return Game(1, [0 for _ in range(9)])
+
+    def _str_player(self, i):
+        if i == 1:
+            return 'O'
+        elif i == 2:
+            return 'X'
+        return ' '
 
     def get_player(self):
-        return 'O' if self.player == 1 else 'X'
+        return self._str_player(self.player)
 
     def valid_move(self, i):
-        return 1 <= i and i <= 9 and concat(self.grid)[i-1] == 0
+        return 1 <= i and i <= 9 and self.grid[i-1] == 0
 
     def next(self):
         return 2 if self.player == 1 else 1
@@ -61,17 +67,18 @@ class Game():
         if not self.valid_move(move):
             return self
 
-        init, tail = drop_at(move, concat(self.grid))
-        grid = chop(3, init + [self.player] + tail)
+        init, tail = drop_at(move, self.grid)
+        new_grid = init + [self.player] + tail
 
-        return Game(self.next(), grid)
+        return Game(self.next(), new_grid)
 
     def draw_board(self):
-        show_board(self.grid)
+        grid = chop(3, [self._str_player(i) for i in self.grid])
+        show_board(grid)
 
     def wins(self):
         return False
 
     def full(self):
-        return all([i != 0 for i in concat(self.grid)])
+        return all([i != 0 for i in self.grid])
 
