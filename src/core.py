@@ -1,53 +1,8 @@
 #!/usr/bin/env python3
 
 import functools
-
-
-def concat(xss):
-    return functools.reduce(lambda xs,ys: xs+ys, xss)
-
-
-def chop(n, xs):
-    if len(xs) == 0:
-        return []
-    return [xs[:n]] + chop(n, xs[n:])
-
-
-def drop_at(i, xs):
-    return xs[:i-1], xs[i:]
-
-
-def show_player(player):
-    middle = '   '
-    if player == 1:
-        middle = ' O '
-    elif player == 2:
-        middle = ' X '
-    return ['   ', middle, '   ']
-
-
-def zipWith(fn, xs, ys):
-    return [fn(a,b) for (a,b) in zip(xs,ys)]
-
-
-def interleave(x, xs):
-    if len(xs) == 0:
-        return []
-    elif len(xs) == 1:
-        return xs
-    return [xs[0]] + [x] + interleave(x, xs[1:])
-
-
-def show_row(row):
-    bar = ['|' for _ in range(3)]
-    besides = lambda xs,ys: zipWith(lambda x,y: x+y, xs, ys)
-    return functools.reduce(besides, interleave(bar, list(map(show_player, row))))
-
-
-def draw_board(grid):
-    board_size = 3
-    bar = '-' * (board_size*4-1)
-    print("\n".join(concat(interleave([bar], list(map(show_row, grid))))))
+from .utils import concat, chop, drop_at
+from .draw import show_board
 
 
 class Game():
@@ -76,7 +31,7 @@ class Game():
         return Game(self.next(), grid)
 
     def draw_board(self):
-        draw_board(self.grid)
+        show_board(self.grid)
 
 
 def wins():
