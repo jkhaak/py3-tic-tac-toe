@@ -43,11 +43,7 @@ class Game():
 
     def play(self):
         while True:
-            sys.stdout.write(u'\u001b[1000D')
             cls()
             goto(1,1)
             show_board(self.grid)
-            char = sys.stdin.read(1)
-            if ord(char) == 3:
-                break
 
