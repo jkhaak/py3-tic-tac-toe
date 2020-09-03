@@ -1,10 +1,20 @@
 #!/usr/bin/env python3
 
-import tty
-import sys
 import functools
 from .utils import concat, chop, drop_at
 from .draw import show_board, cls, goto
+
+
+def new_game():
+    return Game.empty()
+
+
+def play(game):
+    while True:
+        cls()
+        goto(1,1)
+        show_board(game.grid)
+        command = input()
 
 
 class Game():
@@ -40,10 +50,4 @@ class Game():
 
     def full(self):
         pass
-
-    def play(self):
-        while True:
-            cls()
-            goto(1,1)
-            show_board(self.grid)
 
