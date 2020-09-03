@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
+import tty
+import sys
 import functools
 from .utils import concat, chop, drop_at
-from .draw import show_board
+from .draw import show_board, cls, goto
 
 
 class Game():
@@ -33,23 +35,19 @@ class Game():
     def draw_board(self):
         show_board(self.grid)
 
-
-def wins():
-    pass
-
-
-def full():
-    pass
-
-
-def play(grid, player):
-    if wins():
+    def wins(self):
         pass
 
+    def full(self):
+        pass
 
-def main():
-    play(Game.empty())
+    def play(self):
+        while True:
+            sys.stdout.write(u'\u001b[1000D')
+            cls()
+            goto(1,1)
+            show_board(self.grid)
+            char = sys.stdin.read(1)
+            if ord(char) == 3:
+                break
 
-
-if __name__ == '__main__':
-    main()

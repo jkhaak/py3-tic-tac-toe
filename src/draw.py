@@ -2,6 +2,14 @@
 import functools
 from .utils import concat, zipWith, interleave
 
+def cls():
+    print(u'\033[2J')
+
+
+def goto(x,y):
+    print(u'\033[{};{}H'.format(y,x))
+
+
 def show_player(player):
     middle = '   '
     if player == 1:
@@ -21,6 +29,6 @@ def show_board(grid):
     board_size = 3
     bar = ['-' * (board_size*4-1)]
     board = concat(interleave(bar, list(map(show_row, grid))))
-    print("\n".join(board))
+    print('\n'.join(board))
 
 
