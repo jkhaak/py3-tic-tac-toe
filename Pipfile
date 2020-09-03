@@ -5,10 +5,12 @@ verify_ssl = true
 
 [scripts]
 app = "python src/core.py"
+ipython = "ipython"
 
 [dev-packages]
 
 [packages]
+ipython = "*"
 
 [requires]
 python_version = "3.8"
