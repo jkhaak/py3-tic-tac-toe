@@ -20,7 +20,7 @@ def play():
     running = True
     while running:
         cls()
-        goto(1,1)
+        goto(1, 1)
         game.draw_board()
 
         if game.wins():
@@ -38,7 +38,7 @@ def play():
                 game = game.move(command)
 
 
-class Game():
+class Game:
     board_size = 3
 
     def __init__(self, player, grid):
@@ -51,16 +51,16 @@ class Game():
 
     def _str_player(self, i):
         if i == 1:
-            return 'O'
+            return "O"
         elif i == 2:
-            return 'X'
-        return ' '
+            return "X"
+        return " "
 
     def get_player(self):
         return self._str_player(self.player)
 
     def valid_move(self, i):
-        return 1 <= i and i <= 9 and self.grid[i-1] == 0
+        return 1 <= i and i <= 9 and self.grid[i - 1] == 0
 
     def next_player(self):
         return 2 if self.player == 1 else 1
@@ -95,4 +95,3 @@ class Game():
 
     def full(self):
         return all([i != 0 for i in self.grid])
-
