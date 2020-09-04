@@ -1,6 +1,11 @@
 import functools
 import itertools
 
+
+def transpose(xs):
+    return map(list, zip(*xs))
+
+
 def concat(xss):
     return list(itertools.chain.from_iterable(xss))
 
