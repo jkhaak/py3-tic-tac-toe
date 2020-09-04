@@ -34,7 +34,7 @@ In [2]: import tic_tac_toe.draw as d
 In [3]: import tic_tac_toe.utils as u
 ```
 
-For example: to "debug" row printing one could do the following. First create a debugging function which mimics the `show_board` function. And then call it with some game state.
+For example: to debug row printing one could do the following. First create a debugging function which mimics the `show_board` function. And then call it with some game state.
 
 ```ipython
 In [4]: def draw(grid):
