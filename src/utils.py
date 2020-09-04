@@ -20,13 +20,11 @@ def drop_at(i, xs):
     return xs[: i - 1], xs[i:]
 
 
-def zipWith(fn, xs, ys):
+def zip_with(fn, xs, ys):
     return [fn(a, b) for (a, b) in zip(xs, ys)]
 
 
 def interleave(x, xs):
-    if len(xs) == 0:
-        return []
-    elif len(xs) == 1:
+    if len(xs) <= 1:
         return xs
     return [xs[0]] + [x] + interleave(x, xs[1:])

@@ -1,5 +1,5 @@
-from functools import reduce
-from .utils import concat, zipWith, interleave
+from functools import reduce, partial
+from .utils import concat, zip_with, interleave
 
 
 def cls():
@@ -16,11 +16,11 @@ def show_player(player):
 
 def show_row(row, row_size=3):
     bar = ["|" for _ in range(row_size)]
-    besides = lambda xs, ys: zipWith(lambda x, y: x + y, xs, ys)
-    return reduce(besides, interleave(bar, list(map(show_player, row))))
+    besides = partial(zip_with, lambda x, y: x + y)
+    return reduce(besides, interleave(bar, [show_player(p) for p in row]))
 
 
 def show_board(grid, board_size=3):
     bar = ["-" * (board_size * 4 - 1)]
-    board = concat(interleave(bar, list(map(show_row, grid))))
+    board = concat(interleave(bar, [show_row(row) for row in grid]))
     print("\n".join(board))
