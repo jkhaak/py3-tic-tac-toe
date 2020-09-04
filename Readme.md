@@ -21,3 +21,8 @@ Install required packages with `pipenv install`.
 
 Enter ipython shell with `pipenv run ipython`.
 
+
+## Generate documentation
+
+Run `pipenv run gendoc` or by hand `python -m pydoc -w tic_tac_toe tic_tac_toe.core tic_tac_toe.draw tic_tac_toe.utils`
+
