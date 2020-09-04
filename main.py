@@ -1,4 +1,4 @@
-from src.core import play
+from tic_tac_toe.core import play
 
 
 if __name__ == '__main__':

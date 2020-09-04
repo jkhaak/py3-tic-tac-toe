@@ -6,6 +6,7 @@ verify_ssl = true
 [scripts]
 app = "python main.py"
 ipython = "ipython"
+gendoc = "python -m pydoc -w tic_tac_toe tic_tac_toe.core tic_tac_toe.draw tic_tac_toe.utils"
 
 [dev-packages]
 
