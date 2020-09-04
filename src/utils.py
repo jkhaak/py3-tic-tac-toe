@@ -17,6 +17,10 @@ def chop(n, xs):
 
 
 def drop_at(i, xs):
+    if i <= 0:
+        return [], xs
+    elif len(xs) < i:
+        return xs, []
     return xs[: i - 1], xs[i:]
 
 
