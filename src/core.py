@@ -8,9 +8,9 @@ def new_game():
     return Game.empty()
 
 
-def get_input():
+def get_input(msg=""):
     try:
-        return int(input())
+        return int(input(msg))
     except ValueError:
         return None
 
@@ -24,13 +24,14 @@ def play():
         game.draw_board()
 
         if game.wins():
-            print("Player {} wins!".format(game.get_player()))
+            print("Player {} wins!".format(game.winner()))
             running = False
         elif game.full():
             print("It is a draw!")
             running = False
         else:
-            command = get_input()
+            msg = "Player {} choose a cell with numbers 1-9: "
+            command = get_input(msg.format(game.get_player()))
             if command is None:
                 print("Error: invalid input")
                 continue
@@ -56,8 +57,11 @@ class Game:
             return "X"
         return " "
 
-    def get_player(self):
+    def winner(self):
         return self._str_player(self.player)
+
+    def get_player(self):
+        return self._str_player(self.next_player())
 
     def valid_move(self, i):
         return 1 <= i and i <= 9 and self.grid[i - 1] == 0
