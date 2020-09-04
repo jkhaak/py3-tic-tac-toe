@@ -4,10 +4,6 @@ from .utils import concat, chop, drop_at, transpose
 from .draw import show_board, cls, goto
 
 
-def new_game():
-    return Game.empty()
-
-
 def get_input(msg=""):
     try:
         return int(input(msg))
@@ -16,27 +12,24 @@ def get_input(msg=""):
 
 
 def play():
-    game = new_game()
-    running = True
-    while running:
+    game = Game.new_game()
+    instructions = "Player {} choose a cell with numbers 1-9: "
+
+    while True:
         cls()
         goto(1, 1)
         game.draw_board()
 
         if game.wins():
             print("Player {} wins!".format(game.winner()))
-            running = False
+            break
         elif game.full():
             print("It is a draw!")
-            running = False
-        else:
-            msg = "Player {} choose a cell with numbers 1-9: "
-            command = get_input(msg.format(game.get_player()))
-            if command is None:
-                print("Error: invalid input")
-                continue
-            else:
-                game = game.move(command)
+            break
+
+        command = get_input(instructions.format(game.get_player()))
+        if command is not None:
+            game = game.move(command)
 
 
 class Game:
@@ -47,7 +40,7 @@ class Game:
         self.grid = grid
 
     @classmethod
-    def empty(cls):
+    def new_game(cls):
         return Game(1, [0 for _ in range(cls.board_size ** 2)])
 
     def _str_player(self, i):
