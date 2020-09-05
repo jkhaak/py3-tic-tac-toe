@@ -27,7 +27,8 @@ def show_row(row):
     """
     Creates a game row for later printing. Returns row in a list which each element represents a printable row in the game view.
     """
-    bar = ["|" for _ in range(len(row))]
+    cell_height = 3
+    bar = ["|" for _ in range(cell_height)]
     besides = ft.partial(zip_with, lambda x, y: x + y)
     return ft.reduce(besides, interleave(bar, [show_player(p) for p in row]))
 
