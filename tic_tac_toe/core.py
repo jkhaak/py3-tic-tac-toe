@@ -117,7 +117,7 @@ class Game:
 
     def draw_board(self, draw):
         """
-        Calls given drawing function by giving the current datastructure of the game to it.
+        Calls given drawing function by giving the current data structure of the game to it.
 
         Return the result of draw function.
         """
