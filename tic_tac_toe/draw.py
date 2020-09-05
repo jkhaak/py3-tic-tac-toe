@@ -23,21 +23,21 @@ def show_player(player):
     return ["   ", " {} ".format(player), "   "]
 
 
-def show_row(row, row_size=3):
+def show_row(row):
     """
     Creates a game row for later printing. Returns row in a list which each element represents a printable row in the game view.
     """
-    bar = ["|" for _ in range(row_size)]
+    bar = ["|" for _ in range(len(row))]
     besides = ft.partial(zip_with, lambda x, y: x + y)
     return ft.reduce(besides, interleave(bar, [show_player(p) for p in row]))
 
 
-def show_board(grid, board_size=3):
+def show_board(grid):
     """
     Prints the whole board.
 
     Joins rows together with dashed lines before printing.
     """
-    bar = ["-" * (board_size * 4 - 1)]
+    bar = ["-" * (len(grid) * 4 - 1)]
     board = concat(interleave(bar, [show_row(row) for row in grid]))
     print("\n".join(board))

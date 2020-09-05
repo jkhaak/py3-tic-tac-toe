@@ -65,7 +65,7 @@ class Game:
         """
         Creates a blank game state. Used for initializing the game.
         """
-        return Game(1, chop(3, [0 for _ in range(cls.board_size ** 2)]))
+        return Game(1, chop(cls.board_size, [0 for _ in range(cls.board_size ** 2)]))
 
     def _str_player(self, i):
         """
@@ -95,7 +95,9 @@ class Game:
 
         Return boolean. True for valid, False for invalid move.
         """
-        return 1 <= i and i <= 9 and concat(self.grid)[i - 1] == 0
+        low = 1
+        high = self.board_size ** 2
+        return low <= i and i <= high and concat(self.grid)[i - 1] == 0
 
     def next_player(self):
         """
@@ -113,7 +115,7 @@ class Game:
         init, tail = drop_at(move, concat(self.grid))
         new_grid = init + [self.next_player()] + tail
 
-        return Game(self.next_player(), chop(3, new_grid))
+        return Game(self.next_player(), chop(self.board_size, new_grid))
 
     def draw_board(self, draw):
         """
